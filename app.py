@@ -10,7 +10,8 @@ from werkzeug.utils import secure_filename
 
 load_dotenv()
 
-app = Flask(__name__)
+instance_path = "/tmp" if os.getenv("VERCEL") else os.path.join(os.getcwd(), "instance")
+app = Flask(__name__, instance_path=instance_path)
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -457,6 +458,9 @@ def admin_delete_photo(id):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
+
 
 
 
