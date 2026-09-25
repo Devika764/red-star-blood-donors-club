@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Donor - Red Star Blood Donors Club</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+        }
+
+        .header {
+            background: #b30000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+        }
+
+        h2 {
+            color: #b30000;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button,
+        .cancel {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            background: #b30000;
+            color: white;
+        }
+
+        .cancel {
+            background: #555;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Red Star Blood Donors Club</h1>
+    <p>Admin - Edit Donor</p>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Edit Donor Details</h2>
+
+        <form method="POST">
+
+            <label>Full Name</label>
+            <input
+                type="text"
+                name="name"
+                value="{{ donor.name }}"
+                required
+            >
+
+            <label>Blood Group</label>
+            <select name="blood_group" required>
+                <option value="">Select Blood Group</option>
+
+                <option value="A+" {% if donor.blood_group == "A+" %}selected{% endif %}>A+</option>
+                <option value="A-" {% if donor.blood_group == "A-" %}selected{% endif %}>A-</option>
+                <option value="B+" {% if donor.blood_group == "B+" %}selected{% endif %}>B+</option>
+                <option value="B-" {% if donor.blood_group == "B-" %}selected{% endif %}>B-</option>
+                <option value="AB+" {% if donor.blood_group == "AB+" %}selected{% endif %}>AB+</option>
+                <option value="AB-" {% if donor.blood_group == "AB-" %}selected{% endif %}>AB-</option>
+                <option value="O+" {% if donor.blood_group == "O+" %}selected{% endif %}>O+</option>
+                <option value="O-" {% if donor.blood_group == "O-" %}selected{% endif %}>O-</option>
+            </select>
+
+            <label>Phone Number</label>
+            <input
+                type="text"
+                name="phone"
+                value="{{ donor.phone }}"
+                required
+            >
+
+            <label>Location</label>
+            <input
+                type="text"
+                name="location"
+                value="{{ donor.location }}"
+                required
+            >
+
+            <label>Last Donation Date</label>
+            <input
+                type="date"
+                name="last_donation_date"
+                value="{{ donor.last_donation_date or '' }}"
+            >
+
+            <div class="buttons">
+                <button type="submit">
+                    Update Donor
+                </button>
+
+                <a href="/admin/donors" class="cancel">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

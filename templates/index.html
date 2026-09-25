@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Red Star Blood Donors Club</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="top-strip">
+    <span>Helpline: <a href="tel:9491859039">+91 94918 59039</a></span>
+    <span>Reg No: 267/2025</span>
+</div>
+<nav class="navbar">
+
+    <!-- CONVENOR -->
+    <div class="leader-block convenor-block">
+        <img class="header-side-photo"
+             src="{{ url_for('static', filename='uploads/convenor.jpg') }}"
+             alt="Chinta Kondal Rao">
+
+        <div class="header-person-info">
+        <strong>Chinta Kondal Rao</strong>
+        <span>Convenor, Red Star Blood Donors Club</span>
+    </div>
+</div>
+
+<!-- CLUB LOGO -->
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Red Star Blood Donors Club Logo">
+        <div class="registration-number">Reg No: 267/2025</div>
+    </div>
+
+    <!-- CLUB TITLE + DETAILS -->
+    <div class="club-header-info">
+        <div class="club-name">RED STAR BLOOD DONORS CLUB</div>
+        <div class="club-established">Established on 15th January 2020 by Red Star Youth, Pinireddy Gudem</div>
+        <div class="club-address">
+            Pinireddy Gudem, Gopalapuram, Garla Mandalam,<br>
+            Khammam District, Telangana &ndash; 507210
+        </div>
+    </div>
+
+    <!-- CO-CONVENOR DETAILS -->
+    <div class="header-person-info coconvenor-info">
+        <strong>Pranay Vanguri</strong>
+        <span>Co-Convenor, Red Star Blood Donors Club</span>
+    </div>
+
+    <!-- CO-CONVENOR PHOTO -->
+    <div class="header-person coconvenor-person">
+        <img class="header-side-photo" src="{{ url_for('static', filename='uploads/pranay.jpg') }}" alt="Pranay Vanguri">
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-links">
+        <a href="/">Home</a>
+
+        <a href="/admin/donors">Donors List - Admin</a>
+        <a href="/donate">Register</a>
+        <a href="/contact">Contact</a>
+    </div>
+
+</nav>
+<script>
+(function(){var slides=document.querySelectorAll('.banner-slider .slide');var i=0;setInterval(function(){slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active');},4000);})();
+</script>
+
+
+
+
+
+
+
+
+<section class="banner-slider">
+
+    <div class="slide active" style="background-image: url('{{ url_for('static', filename='images/banner.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>DONATE BLOOD, SAVE LIVES</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/youth.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>RED STAR YOUTH</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/youth2.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>UNITED FOR A CAUSE</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/red-star-youth-3.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>YOUTH IN ACTION</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/red-star-youth-5.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>SERVING WITH HEART</h2>
+        </div>
+    </div>
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/red-7.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>UNITED FOR A CAUSE</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/red-8.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>YOUTH POWER IN ACTION</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/red-9.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>A JOURNEY OF SERVICE</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/red-10.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>TOGETHER WE CAN SAVE LIVES</h2>
+        </div>
+    </div>
+
+    <div class="slide" style="background-image: url('{{ url_for('static', filename='uploads/red-11.jpg') }}');">
+        <div class="slide-overlay">
+            <h2>COMMUNITY UNITED FOR HUMANITY</h2>
+        </div>
+    </div>
+
+</section>
+<!-- RED STAR YOUTH -->
+<section class="section youth-section">
+
+    <h2>Red Star Youth</h2>
+
+    <div class="cards">
+
+        <div class="card">
+    <h3>Convenor</h3>
+    <img src="{{ url_for('static', filename='uploads/convenor.jpg') }}"
+         alt="Chinta Kondal Rao"
+         class="convenor-photo">
+    <p><strong>Chinta Kondal Rao</strong></p>
+</div>
+
+        <div class="card">
+            <h3>Red Star Youth</h3>
+
+            <div class="youth-photo">
+                <img src="{{ url_for('static', filename='uploads/youth.jpg') }}"
+                     alt="Red Star Youth">
+                <img src="{{ url_for('static', filename='uploads/collage_bottom.jpg') }}" alt="Red Star Youth volunteers">
+                <img src="{{ url_for('static', filename='uploads/red-star-youth-3.jpg') }}"
+                     alt="Red Star Youth 3">
+                <img src="{{ url_for('static', filename='uploads/new-1.jpeg') }}" alt="Red Star Youth new image">
+            </div>
+        </div>
+
+        <div class="card">
+    <h3>Co-Convenor</h3>
+
+    <img src="{{ url_for('static', filename='uploads/pranay.jpg') }}"
+         alt="Pranay Vanguri"
+         class="convenor-photo">
+
+    <p><strong>Pranay Vanguri</strong></p>
+</div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="section">
+
+    <h2>About Red Star Blood Donors Club</h2>
+
+    <div class="about-content">
+
+        <p>
+            Red Star Blood Donors Club is a voluntary, youth-led social service
+            organization established on 15 January 2020 by registered young
+            volunteers who come from economically modest backgrounds.
+        </p>
+
+        <p>
+            The organization was founded by youth who do not have significant
+            financial resources or special economic advantages, but who believe
+            that people can support one another through collective effort and
+            small contributions.
+        </p>
+
+        <p>
+            The club was established with the objective of supporting patients
+            and communities through blood donation and other humanitarian
+            activities. Its work is based on the principle that meaningful
+            social service does not always require large financial resources.
+        </p>
+
+        <p>
+            When people contribute according to their ability and support one
+            another, even small forms of assistance can make a significant
+            difference.
+        </p>
+
+        <p>
+            The organization works to connect voluntary blood donors directly
+            with patients in need of blood, helping families find timely blood
+            support during medical emergencies.
+        </p>
+
+        <div class="highlight-box">
+            <strong>1000+ Free Blood Donations</strong>
+            <p>
+                Since its establishment, the club and its volunteers have
+                facilitated 925+ free blood donations, contributing to emergency
+                blood support for patients across different locations.
+            </p>
+        </div>
+
+
+        <h3>Youth-Led Social Service</h3>
+
+        <p>
+            Red Star Blood Donors Club is driven by the participation of
+            registered young volunteers and social-service-minded individuals.
+            Many of the volunteers come from ordinary and economically modest
+            families.
+        </p>
+
+        <p>
+            Despite having limited financial strength, they contribute their
+            time, effort, resources, and support to help people in need.
+        </p>
+
+        <p>
+            The organization aims to build a wider network of youth volunteers
+            throughout all districts of Telangana, creating a coordinated
+            social-service platform through which people can seek and provide
+            assistance.
+        </p>
+
+        <p>
+            The club encourages individuals to support one another through
+            small contributions, shared resources, voluntary service, and
+            collective responsibility.
+        </p>
+
+
+        <h3>Community Support</h3>
+
+        <p>
+            The club's activities extend beyond blood donation. Volunteers also
+            support economically disadvantaged families and individuals by
+            providing essential items such as:
+        </p>
+
+        <ul>
+            <li>Rice and other food grains</li>
+            <li>Vegetables and essential groceries</li>
+            <li>Household necessities</li>
+            <li>Educational books and study materials</li>
+            <li>Basic assistance to students and families in need</li>
+        </ul>
+
+        <p>
+            These activities are carried out through the combined efforts of
+            volunteers, donors, supporters, and community members.
+        </p>
+
+        <p>
+            The organization believes that even small contributions, when
+            brought together, can provide meaningful support to families
+            facing difficult circumstances.
+        </p>
+
+
+        <h3>Vision</h3>
+
+        <p>
+            The organization aims to develop a statewide network of responsible
+            youth volunteers who can work together to provide timely assistance
+            to people in need, particularly during medical emergencies and
+            difficult circumstances.
+        </p>
+
+        <p>
+            Red Star Blood Donors Club envisions a community in which people
+            support one another regardless of their financial background, and
+            where youth can contribute to social welfare through voluntary
+            service, cooperation, and shared responsibility.
+        </p>
+
+
+        <h3>Mission</h3>
+
+        <ul>
+            <li>Promote voluntary blood donation and awareness.</li>
+            <li>Connect blood donors with patients requiring blood.</li>
+            <li>Encourage young people to participate in community service.</li>
+            <li>Support economically disadvantaged families through small but meaningful contributions.</li>
+            <li>Extend humanitarian assistance to individuals and families in need.</li>
+            <li>Support students through educational materials and essential resources.</li>
+            <li>Encourage people from modest economic backgrounds to participate in social service.</li>
+            <li>Develop a coordinated social-service network across Telangana.</li>
+            <li>Demonstrate that collective effort and mutual support can create positive change.</li>
+        </ul>
+
+        <p>
+            Through the continued participation of its volunteers and
+            supporters, Red Star Blood Donors Club strives to make social
+            service accessible, organized, and community-driven.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- DONOR REGISTRATION -->
+<section id="donate" class="section">
+
+    <h2>Register as a Blood Donor</h2>
+
+    <p>
+        If you are willing to donate blood, register your details with us.
+    </p>
+
+    <form action="{{ url_for('donate') }}" method="POST" class="donor-form">
+
+        <div class="form-group">
+            <label>Full Name <span style="color:#c40000;font-weight:bold;">*</span></label>
+            <input type="text" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Blood Group <span style="color:#c40000;font-weight:bold;">*</span></label>
+
+            <select name="blood_group" required>
+                <option value="">Select Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number <span style="color:#c40000;font-weight:bold;">*</span></label>
+            <input type="tel" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label>Location <span style="color:#c40000;font-weight:bold;">*</span></label>
+            <input type="text" name="location" required>
+        </div>
+
+        <div class="form-group">
+            <label>Last Donation Date (Optional)</label>
+            <input type="date" name="last_donation_date">
+        </div>
+
+        <p style="font-size:14px;color:#c40000;margin:10px 0;">* All fields are mandatory except Last Donation Date</p>
+            <button type="submit" class="btn btn-primary">
+            Register as Donor
+        </button>
+
+    </form>
+
+    <p class="privacy-note">
+        Your phone number and personal registration details are kept private
+        and are accessible only to authorized administrators.
+    </p>
+
+</section>
+
+
+<!-- ACTIVITIES -->
+<section id="activities" class="section">
+
+    <h2>All Activities & Photos</h2>
+
+    <p>
+        Explore the activities carried out by Red Star Blood Donors Club
+        and its volunteers.
+    </p>
+
+    {% if gallery_photos or donation_updates %}
+
+        {% if gallery_photos %}
+        <div class="gallery-photos-grid">
+            {% for p in gallery_photos %}
+            <div class="gallery-photo-card">
+
+                <img src="{{ url_for('static', filename='uploads/' + p.filename) }}"
+                     alt="{{ p.caption or 'Red Star Blood Donors Club Activity' }}"
+                     loading="lazy">
+
+                {% if p.caption %}
+                <p>{{ p.caption }}</p>
+                {% endif %}
+
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        {% if donation_updates %}
+        <div class="activity-list">
+
+            {% for donation in donation_updates %}
+
+            <div class="activity-card">
+
+                {% set gallery = donation.photos.split(',') if donation.photos else ([donation.photo] if donation.photo else []) %}
+
+                {% if gallery %}
+                <div class="activity-gallery">
+                    {% for p in gallery %}
+                    <img src="{{ url_for('static', filename='uploads/' + p) }}"
+                         alt="Activity photo"
+                         loading="lazy">
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="activity-info">
+
+                    <h3>{{ donation.donor_name }}</h3>
+
+                    {% if donation.blood_group %}
+                    <p>
+                        <strong>Blood Group:</strong>
+                        {{ donation.blood_group }}
+                    </p>
+                    {% endif %}
+
+                    <p>
+                        <strong>Location:</strong>
+                        {{ donation.location }}
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        {{ donation.donation_date }}
+                    </p>
+
+                    {% if donation.description %}
+                    <p>{{ donation.description }}</p>
+                    {% endif %}
+
+                    {% if donation.video_url %}
+                    {% set yt = donation.video_url|yt_embed %}
+
+                    {% if yt %}
+                    <div class="activity-video">
+                        <iframe src="{{ yt }}"
+                                title="Activity video"
+                                loading="lazy"
+                                allowfullscreen></iframe>
+                    </div>
+
+                    {% elif donation.video_url.startswith('http') %}
+                    <p>
+                        <a class="btn btn-secondary"
+                           href="{{ donation.video_url }}"
+                           target="_blank"
+                           rel="noopener">
+                            Watch video
+                        </a>
+                    </p>
+                    {% endif %}
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+    {% else %}
+
+        <p>No activities or photos available yet.</p>
+
+    {% endif %}
+
+</section>
+
+
+<!-- WHATSAPP COMMUNITY -->
+<section id="whatsapp-community" style="padding:55px 20px; text-align:center; background:#f8fff9;">
+    <div style="max-width:850px; margin:auto;">
+
+        <h2 style="color:#b30000; margin-bottom:12px;">
+            🤝 Join Our WhatsApp Community
+        </h2>
+
+        <p style="color:#555; font-size:16px; line-height:1.6; max-width:700px; margin:0 auto 25px;">
+            Stay connected with Red Star Blood Donors Club and receive
+            blood requirement updates, donation camp information,
+            volunteer opportunities, and community activity updates.
+        </p>
+
+        <div style="display:inline-block; background:white; padding:18px; border-radius:16px; box-shadow:0 4px 18px rgba(0,0,0,0.12); margin-bottom:20px;">
+            <img src="{{ url_for('static', filename='images/whatsapp-group-qr.png') }}"
+                 alt="Scan QR Code to Join Red Star Blood Donors Club WhatsApp Group"
+                 style="width:230px; height:230px; display:block; object-fit:contain;">
+        </div>
+
+        <p style="font-weight:bold; color:#333; margin:8px 0 18px;">
+            📱 Scan this QR code to join our WhatsApp Group
+        </p>
+
+        <a href="https://chat.whatsapp.com/CoszsrPQPM3CRWn6N4lgbS?s=qt&p=i&mlu=4&ilr=4"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="display:inline-block; padding:13px 25px; background:#25D366; color:white; text-decoration:none; border-radius:8px; font-weight:bold;">
+            🟢 Join WhatsApp Group
+        </a>
+
+    </div>
+</section>
+<!-- END WHATSAPP COMMUNITY -->
+<!-- CONTACT -->
+<section id="contact" class="section contact-section">
+
+    <h2>Contact Us</h2>
+
+    <p>
+        For blood donation support, volunteering, or other information,
+        please contact us.
+    </p>
+
+    <div class="contact-cards">
+
+        <div class="card">
+            <h3>Office</h3>
+            <p>+91 89776 89383</p>
+        </div>
+
+        <div class="card">
+            <h3>Convenor</h3>
+            <p>Chinta Kondal Rao</p>
+            <p>+91 94918 92093</p>
+        </div>
+
+        <div class="card">
+            <h3>Co-Convenor</h3>
+            <p>Pranay Vanguri</p>
+            <p>+91 99495 12395</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<div style="max-width:900px;margin:20px auto;padding:14px 18px;background:#f8f9fa;border:1px solid #ddd;border-radius:8px;font-size:14px;line-height:1.6;color:#555;text-align:left;">
+<strong>Disclaimer:</strong> Red Star Blood Donors Club is a voluntary organisation that only helps connect blood donors with people in need. Donors listed here have registered voluntarily. We do not guarantee the availability, eligibility or medical fitness of any donor, so please ensure the donor is medically checked at the hospital/blood bank before donation. Blood donation is free of cost. Do not pay money to anyone. The club is not responsible for any dealings between donors and patients' families.
+</div>
+<footer>
+
+    <p>
+        &copy; 2026 Red Star Blood Donors Club
+    </p>
+
+    <p>
+        Together, We Can Save Lives.
+    </p>
+
+</footer>
+
+
+<!-- FIREBASE -->
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAaywgCPj2OXXzCux_qbBF9rGL7jBnPc5s",
+        authDomain: "red-star-blood-donors-club.firebaseapp.com",
+        projectId: "red-star-blood-donors-club",
+        storageBucket: "red-star-blood-donors-club.firebasestorage.app",
+        messagingSenderId: "342928981356",
+        appId: "1:342928981356:web:26b285597e074609178749",
+        measurementId: "G-0C5138NEMF"
+    };
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    console.log("Firebase connected successfully");
+
+</script>
+<script>
+(function(){
+    var slides = document.querySelectorAll('.banner-slider .slide');
+    var i = 0;
+
+    if (slides.length > 1) {
+        setInterval(function(){
+            slides[i].classList.remove('active');
+            i = (i + 1) % slides.length;
+            slides[i].classList.add('active');
+        }, 4000);
+    }
+})();
+</script>
+</body>
+</html>
+
+
+
+

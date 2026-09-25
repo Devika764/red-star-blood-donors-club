@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Activity</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="Red Star Blood Donors"
+             style="height: 120px; width: auto;">
+    </div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/donors">Donors</a>
+        <a href="/donate">I Want to Donate</a>
+        <a href="/contact">Contact</a>
+    </div>
+</nav>
+
+<section class="section">
+
+    <h1>Add Activity</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+
+        <label for="donor_name">Title</label>
+        <input type="text" id="donor_name" name="donor_name" required
+               placeholder="Ex: Blood Donation Camp for Thalassemia Children">
+
+        <label for="donation_date">Date</label>
+        <input type="date" id="donation_date" name="donation_date" required>
+
+        <label for="location">Place</label>
+        <input type="text" id="location" name="location" required
+               placeholder="Ex: Bus Stand Center, Garla">
+
+        <label for="photos">Photos (multiple select cheyochu)</label>
+        <input type="file" id="photos" name="photos" accept="image/*" multiple>
+
+        <label for="video_url">Video link (YouTube, optional)</label>
+        <input type="url" id="video_url" name="video_url" placeholder="https://youtu.be/...">
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5"
+                  placeholder="Activity details..."></textarea>
+
+        <p><strong>Only if this is a single donor's donation (optional):</strong></p>
+
+        <label for="blood_group">Blood Group</label>
+        <select id="blood_group" name="blood_group">
+            <option value="">-</option>
+            <option value="A+">A+</option><option value="A-">A-</option>
+            <option value="B+">B+</option><option value="B-">B-</option>
+            <option value="AB+">AB+</option><option value="AB-">AB-</option>
+            <option value="O+">O+</option><option value="O-">O-</option>
+        </select>
+
+        <label for="phone">Phone (public ki kanipinchadu)</label>
+        <input type="tel" id="phone" name="phone">
+
+        <button type="submit">Save Activity</button>
+    </form>
+
+</section>
+
+</body>
+</html>

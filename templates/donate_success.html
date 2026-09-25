@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .success-card {
+            background: white;
+            width: 90%;
+            max-width: 550px;
+            padding: 45px 30px;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .check {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            background: #e8f8ee;
+            color: #198754;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #b30000;
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .name {
+            font-weight: bold;
+            color: #222;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 15px 5px 5px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #c40000;
+            color: white;
+        }
+
+        .secondary {
+            background: #f1f1f1;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="success-card">
+
+        <div class="check">✓</div>
+
+        <h1>Thank You for Registering!</h1>
+
+        <p>
+            Thank you, <span class="name">{{ donor_name }}</span>,
+            for registering as a blood donor.
+        </p>
+
+        <p>
+            Your registration has been successfully completed.
+            Your contribution can help save lives.
+        </p>
+
+        <a href="/" class="btn primary">Back to Home</a>
+        <a href="/donors" class="btn secondary">View Donors List</a>
+
+    </div>
+
+</body>
+</html>

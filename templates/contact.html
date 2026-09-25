@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us - Red Star Blood Donors</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="Red Star Blood Donors"
+             style="height: 120px; width: auto;">
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+<a href="/admin/donors">Donors List - Admin</a>
+        <a href="/donate">Register</a>
+        <a href="/contact">Contact</a>
+    </div>
+
+</nav>
+
+<section class="contact-section">
+
+    <div class="contact-content">
+
+        <h1>Contact Us</h1>
+
+        <p>
+            For blood donation enquiries, donor coordination, and assistance,
+            please contact us using the details below.
+        </p>
+
+        <div class="contact-card">
+
+            <h2>Office</h2>
+            <p><strong>Phone:</strong> +91 89776 89383</p>
+
+        </div>
+
+        <div class="contact-card">
+
+            <h2>Convenor</h2>
+            <p><strong>Chinta Kondal Rao</strong></p>
+            <p><strong>Phone:</strong> +91 94918 92093</p>
+
+        </div>
+
+        <div class="contact-card">
+
+            <h2>Co-Convenor</h2>
+            <p><strong>Pranay Vanguri</strong></p>
+            <p><strong>Phone:</strong> +91 99495 12395</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div style="max-width:900px;margin:20px auto;padding:14px 18px;background:#f8f9fa;border:1px solid #ddd;border-radius:8px;font-size:14px;line-height:1.6;color:#555;text-align:left;">
+<strong>Disclaimer:</strong> Red Star Blood Donors Club is a voluntary organisation that only helps connect blood donors with people in need. Donors listed here have registered voluntarily. We do not guarantee the availability, eligibility or medical fitness of any donor, so please ensure the donor is medically checked at the hospital/blood bank before donation. Blood donation is free of cost. Do not pay money to anyone. The club is not responsible for any dealings between donors and patients' families.
+</div>
+</body>
+</html>

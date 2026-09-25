@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Blood</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+<style>
+/* ===== DONOR PAGE BABY PHOTO BACKGROUND SLIDER ===== */
+
+.donor-page-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.donor-page-bg .baby-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: babyFade 10s infinite;
+}
+
+.donor-page-bg .baby-slide:nth-child(1) {
+    background-image: url("{{ url_for('static', filename='images/baby1.jpg') }}");
+    animation-delay: 0s;
+}
+
+.donor-page-bg .baby-slide:nth-child(2) {
+    background-image: url("{{ url_for('static', filename='images/baby2.jpg') }}");
+    animation-delay: 5s;
+}
+
+.donor-page-bg .baby-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+@keyframes babyFade {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 1;
+    }
+    55% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Put website content above the photos */
+body > * {
+    position: relative;
+    z-index: 2;
+}
+
+.donor-page-bg {
+    z-index: 1 !important;
+}
+
+.navbar,
+.section {
+    position: relative;
+    z-index: 3;
+}
+
+@media (max-width: 768px) {
+    .donor-page-bg .baby-slide {
+        background-position: center center;
+    }
+
+    .donor-page-bg .baby-overlay {
+        background: rgba(255, 255, 255, 0.70);
+    }
+}
+</style>
+</head>
+
+<body>
+<!-- DONOR PAGE BABY PHOTO SLIDER -->
+<div class="donor-page-bg">
+    <div class="baby-slide"></div>
+    <div class="baby-slide"></div>
+    <div class="baby-overlay"></div>
+</div>
+<!-- END DONOR PAGE BABY PHOTO SLIDER -->
+
+
+<nav class="navbar">
+    <div class="logo">Blood Donation</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        
+        <a href="/admin/donors">Donors List - Admin</a>
+        <a href="/donate">Register</a>
+        <a href="/contact">Contact</a>
+    </div>
+</nav>
+
+<section class="section">
+
+    <h2>Register as a Blood Donor</h2>
+
+    <p>Fill in your details to register as a blood donor.</p>
+
+    <div class="card" style="margin: 30px auto; width: 450px;">
+
+        <form method="POST">
+
+            <label>Full Name <span style="color:#c40000;font-weight:bold;">*</span></label>
+            <input type="text" name="name"
+                   placeholder="Enter your full name" required>
+
+            <br><br>
+
+            <label>Blood Group <span style="color:#c40000;font-weight:bold;">*</span></label>
+            <select name="blood_group" required>
+                <option value="">Select Blood Group</option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>O+</option>
+                <option>O-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+            </select>
+
+            <br><br>
+
+            <label>Phone Number <span style="color:#c40000;font-weight:bold;">*</span></label>
+            <input type="tel" name="phone"
+                   placeholder="Enter phone number" required>
+
+            <br><br>
+
+            <label>Location <span style="color:#c40000;font-weight:bold;">*</span></label>
+            <input type="text" name="location"
+                   placeholder="Enter your location" required>
+
+            <br><br>
+
+            <label>Last Donation Date <span style="color:#777;font-weight:normal;">(optional)</span></label>
+            <input type="date" name="last_donation_date">
+
+            <br><br>
+
+            <p style="font-size:14px;color:#c40000;margin:10px 0;">* All fields are mandatory except Last Donation Date</p>
+            <button type="submit" class="btn btn-primary">
+                Register as Donor
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<div style="max-width:900px;margin:20px auto;padding:14px 18px;background:#f8f9fa;border:1px solid #ddd;border-radius:8px;font-size:14px;line-height:1.6;color:#555;text-align:left;">
+<strong>Disclaimer:</strong> Red Star Blood Donors Club is a voluntary organisation that only helps connect blood donors with people in need. Donors listed here have registered voluntarily. We do not guarantee the availability, eligibility or medical fitness of any donor, so please ensure the donor is medically checked at the hospital/blood bank before donation. Blood donation is free of cost. Do not pay money to anyone. The club is not responsible for any dealings between donors and patients' families.
+</div>
+<footer>
+    <p>Copyright 2026 Blood Donation Service. Together, We Can Save Lives.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Blood Donation</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="Red Star Blood Donors"
+             style="height: 80px; width: auto;">
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/admin">Admin Dashboard</a>
+
+        <a href="/admin/logout">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<section class="section">
+
+    <h1>Edit Blood Donation</h1>
+
+
+    <form method="POST"
+          enctype="multipart/form-data">
+
+
+        <label for="donor_name">
+            Donor Name
+        </label>
+
+        <input type="text"
+               id="donor_name"
+               name="donor_name"
+               value="{{ donation.donor_name }}"
+               required>
+
+
+        <label for="blood_group">
+            Blood Group
+        </label>
+
+        <select id="blood_group"
+                name="blood_group"
+                required>
+
+            <option value="">Select Blood Group</option>
+
+            <option value="A+"
+                {% if donation.blood_group == "A+" %}selected{% endif %}>
+                A+
+            </option>
+
+            <option value="A-"
+                {% if donation.blood_group == "A-" %}selected{% endif %}>
+                A-
+            </option>
+
+            <option value="B+"
+                {% if donation.blood_group == "B+" %}selected{% endif %}>
+                B+
+            </option>
+
+            <option value="B-"
+                {% if donation.blood_group == "B-" %}selected{% endif %}>
+                B-
+            </option>
+
+            <option value="AB+"
+                {% if donation.blood_group == "AB+" %}selected{% endif %}>
+                AB+
+            </option>
+
+            <option value="AB-"
+                {% if donation.blood_group == "AB-" %}selected{% endif %}>
+                AB-
+            </option>
+
+            <option value="O+"
+                {% if donation.blood_group == "O+" %}selected{% endif %}>
+                O+
+            </option>
+
+            <option value="O-"
+                {% if donation.blood_group == "O-" %}selected{% endif %}>
+                O-
+            </option>
+
+        </select>
+
+
+        <label for="phone">
+            Phone Number
+        </label>
+
+        <input type="tel"
+               id="phone"
+               name="phone"
+               value="{{ donation.phone }}"
+               required>
+
+
+        <label for="location">
+            Location
+        </label>
+
+        <input type="text"
+               id="location"
+               name="location"
+               value="{{ donation.location }}"
+               required>
+
+
+        <label for="donation_date">
+            Donation Date
+        </label>
+
+        <input type="date"
+               id="donation_date"
+               name="donation_date"
+               value="{{ donation.donation_date }}"
+               required>
+
+
+        <label for="photo">
+            Change Donation Photo
+        </label>
+
+        {% if donation.photo %}
+
+            <p>
+                Current Photo:
+                {{ donation.photo }}
+            </p>
+
+        {% endif %}
+
+        <input type="file"
+               id="photo"
+               name="photo"
+               accept="image/*">
+
+
+        <label for="description">
+            Description
+        </label>
+
+        <textarea id="description"
+                  name="description"
+                  rows="4"
+                  placeholder="Enter donation details...">{{ donation.description or "" }}</textarea>
+
+
+        <button type="submit">
+            Update Donation
+        </button>
+
+
+        <a href="/admin"
+           style="display: inline-block; margin-top: 15px;">
+            Cancel
+        </a>
+
+    </form>
+
+</section>
+
+
+<footer>
+
+    <p>
+        Copyright 2026 Blood Donation Service.
+    </p>
+
+</footer>
+
+</body>
+
+</html>

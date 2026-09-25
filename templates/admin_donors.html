@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Donors List</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f5f6f8; }
+        .header { background: #b30000; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; }
+        .header p { margin: 6px 0 0; }
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .top h2 { color: #b30000; margin: 0; }
+        .back { background: #333; color: white; padding: 10px 18px; text-decoration: none; border-radius: 6px; }
+        .search { background: white; padding: 15px 20px; margin-bottom: 15px; border-radius: 10px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .search input, .search select { padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+        .search input { flex: 1; min-width: 200px; }
+        .count { margin-left: auto; color: #555; font-weight: bold; }
+        .sheet { overflow: auto; max-height: 70vh; background: white; border: 1px solid #ccc; border-radius: 6px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { position: sticky; top: 0; background: #b30000; color: white; padding: 12px; border: 1px solid #8f0000; white-space: nowrap; }
+        td { padding: 10px 12px; border: 1px solid #ddd; text-align: center; }
+        tbody tr:nth-child(even) { background: #fafafa; }
+        tbody tr:hover { background: #fff1f1; }
+        .blood { background: #c40000; color: white; padding: 4px 10px; border-radius: 15px; font-weight: bold; }
+        .btn { display: inline-block; padding: 6px 12px; border: none; border-radius: 5px; color: white; text-decoration: none; font-size: 14px; cursor: pointer; }
+        .edit { background: #1a73e8; }
+        .delete { background: #d32f2f; }
+        .actions form { display: inline; }
+        .empty { padding: 40px; text-align: center; color: #666; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Red Star Blood Donors Club</h1>
+    <p>Admin - Donors Management</p>
+</div>
+
+<div class="container">
+
+    <div class="top">
+        <h2>Registered Donors</h2>
+        <a href="/admin" class="back">&larr; Back</a>
+    </div>
+
+    <div class="search">
+        <input type="text" id="q" placeholder="Search name, phone or location..." oninput="filterRows()">
+        <select id="bg" onchange="filterRows()">
+            <option value="">All blood groups</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+            <option>O+</option><option>O-</option>
+        </select>
+        <span class="count">Showing: <span id="count">{{ donors|length }}</span> / {{ donors|length }}</span>
+    </div>
+
+    {% if donors %}
+    <div class="sheet">
+        <table id="donorTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Blood Group</th>
+                    <th>Phone</th>
+                    <th>Location</th>
+                    <th>Last Donation</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in donors %}
+                <tr class="row" data-bg="{{ d.blood_group }}" data-search="{{ (d.name ~ ' ' ~ d.phone ~ ' ' ~ d.location)|lower }}">
+                    <td>{{ loop.index }}</td>
+                    <td>{{ d.name }}</td>
+                    <td><span class="blood">{{ d.blood_group }}</span></td>
+                    <td>{{ d.phone }}</td>
+                    <td>{{ d.location }}</td>
+                    <td>{{ d.last_donation_date or '-' }}</td>
+                    <td class="actions">
+                        <a class="btn edit" href="{{ url_for('admin_edit_donor', id=d.id) }}">Edit</a>
+                        <form method="POST" action="{{ url_for('admin_delete_donor', id=d.id) }}"
+                              onsubmit="return confirm('Ee donor ni delete cheyalaa? Idi undo cheyalemu.');">
+                            <button type="submit" class="btn delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty">No donors registered yet.</div>
+    {% endif %}
+
+</div>
+
+<script>
+function filterRows() {
+    var q = document.getElementById('q').value.toLowerCase();
+    var bg = document.getElementById('bg').value;
+    var shown = 0;
+    document.querySelectorAll('#donorTable tbody tr.row').forEach(function (r) {
+        var ok = r.dataset.search.indexOf(q) !== -1 && (!bg || r.dataset.bg === bg);
+        r.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+    });
+    document.getElementById('count').textContent = shown;
+}
+</script>
+
+</body>
+</html>
