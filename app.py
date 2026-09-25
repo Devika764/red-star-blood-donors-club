@@ -70,6 +70,20 @@ def load_user(user_id):
 with app.app_context():
     db.create_all()
 
+    admin_username = os.getenv("ADMIN_USERNAME")
+    admin_password = os.getenv("ADMIN_PASSWORD")
+
+    if admin_username and admin_password:
+        existing_admin = Admin.query.filter_by(username=admin_username).first()
+
+        if not existing_admin:
+            new_admin = Admin(
+                username=admin_username,
+                password_hash=generate_password_hash(admin_password)
+            )
+            db.session.add(new_admin)
+            db.session.commit()
+
 
 @app.route("/")
 def home():
@@ -458,6 +472,8 @@ def admin_delete_photo(id):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
 
 
 
