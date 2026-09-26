@@ -18,7 +18,7 @@
 </nav>
 
 <section class="section">
-    <h2>All Activities &amp; Photos</h2>
+    <h2>All Activities &amp; Photos</h2>n
 
     <div class="card" style="margin: 20px auto; max-width: 900px; padding: 20px;">
         <h3>Upload Photos</h3>
@@ -27,7 +27,7 @@
             <br><br>
             <input type="text" name="caption" placeholder="Caption (optional)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
             <br><br>
-            <button type="submit" style="background:#b30000; color:white; padding:12px 22px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Upload</button>
+            <input type="submit" value="Upload" style="background:#b30000; color:white; padding:12px 22px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
         </form>
     </div>
 
@@ -37,7 +37,7 @@
         <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:16px; margin-top:15px;">
             {% for p in photos %}
             <div style="background:#fff; border:1px solid #eee; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-                <img src="{{ url_for('static', filename='uploads/' + p.filename) }}" style="width:100%; height:140px; object-fit:cover; display:block;">
+                <img src="{{ p.filename }}" style="width:100%; height:140px; object-fit:cover; display:block;">
                 <div style="padding:8px;">
                     <form method="POST" action="{{ url_for('admin_edit_photo', id=p.id) }}" style="display:flex; gap:4px; margin-bottom:6px;">
                         <input type="text" name="caption" value="{{ p.caption or '' }}" placeholder="Caption" style="flex:1; min-width:0; font-size:12px; padding:5px; border:1px solid #ccc; border-radius:5px;">
@@ -58,3 +58,4 @@
 
 </body>
 </html>
+

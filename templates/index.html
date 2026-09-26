@@ -409,7 +409,7 @@
             {% for p in gallery_photos %}
             <div class="gallery-photo-card">
 
-                <img src="{{ url_for('static', filename='uploads/' + p.filename) }}"
+                <img src="{{ p.filename }}"
                      alt="{{ p.caption or 'Red Star Blood Donors Club Activity' }}"
                      loading="lazy">
 
@@ -514,7 +514,7 @@
     <div style="max-width:850px; margin:auto;">
 
         <h2 style="color:#b30000; margin-bottom:12px;">
-            🤝 Join Our WhatsApp Community
+        🤝 Join Our WhatsApp Community
         </h2>
 
         <p style="color:#555; font-size:16px; line-height:1.6; max-width:700px; margin:0 auto 25px;">
@@ -636,6 +636,7 @@
 </script>
 </body>
 </html>
+
 
 
 

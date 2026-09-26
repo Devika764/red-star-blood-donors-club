@@ -1,4 +1,4 @@
-﻿import re
+import re
 import uuid
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -7,8 +7,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
 import os
 from werkzeug.utils import secure_filename
+import cloudinary
+import cloudinary.uploader
 
-load_dotenv()
+load_dotenv(override=True)
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
 
 instance_path = "/tmp" if os.name != "nt" else os.path.abspath("instance")
 app = Flask(__name__, instance_path=instance_path)
@@ -263,97 +272,52 @@ app.add_template_filter(youtube_embed, "yt_embed")
 
 
 def save_photos(files):
-    try:
-        from PIL import Image, ImageOps
-    except ImportError:
-        Image = None
-
     saved = []
-
-    folder = app.config["UPLOAD_FOLDER"]
-    os.makedirs(folder, exist_ok=True)
-
-    print("UPLOAD FOLDER:", os.path.abspath(folder))
+    print("========== PHOTO UPLOAD START ==========")
     print("FILES RECEIVED:", len(files))
 
     for f in files:
         if not f or not f.filename:
-            print("SKIPPED: No filename")
+            print("SKIPPED: Empty file")
             continue
 
-        print("PROCESSING:", f.filename)
+        filename = secure_filename(f.filename)
+        ext = os.path.splitext(filename)[1].lower()
 
-        ext = os.path.splitext(secure_filename(f.filename))[1].lower()
+        print("PROCESSING:", filename)
 
         if ext not in (".jpg", ".jpeg", ".png", ".webp"):
-            print("SKIPPED: Unsupported extension:", ext)
+            print("SKIPPED: Unsupported image type")
             continue
 
-        name = uuid.uuid4().hex[:12]
+        try:
+            file_data = f.read()
 
-        if Image:
-            try:
-                img = ImageOps.exif_transpose(Image.open(f.stream))
-                img.thumbnail((1600, 1600))
-                img = img.convert("RGB")
-
-                name += ".jpg"
-                output_path = os.path.join(folder, name)
-
-                img.save(
-                    output_path,
-                    "JPEG",
-                    quality=82,
-                    optimize=True
-                )
-
-                print("SAVED:", output_path)
-
-            except Exception as e:
-                print("IMAGE ERROR:", repr(e))
+            if not file_data:
+                print("SKIPPED: File is empty")
                 continue
 
-        else:
-            name += ext
-            output_path = os.path.join(folder, name)
+            result = cloudinary.uploader.upload(
+                file_data,
+                folder="red-star-blood-donors-club/activities",
+                resource_type="image"
+            )
 
-            try:
-                f.save(output_path)
-                print("SAVED:", output_path)
-            except Exception as e:
-                print("FILE SAVE ERROR:", repr(e))
-                continue
+            image_url = result.get("secure_url")
 
-        saved.append(name)
+            if image_url:
+                saved.append(image_url)
+                print("CLOUDINARY SAVED:", image_url)
+            else:
+                print("CLOUDINARY ERROR: No secure URL")
 
-    print("TOTAL SAVED:", saved)
+        except Exception as e:
+            print("PHOTO UPLOAD ERROR:", repr(e))
+            raise
 
+    print("TOTAL SAVED:", len(saved))
+    print("========== PHOTO UPLOAD END ==========")
     return saved
-
-@app.route("/admin/donation/add", methods=["GET", "POST"])
-@login_required
-def add_donation():
-    if request.method == "POST":
-        saved = save_photos(request.files.getlist("photos"))
-
-        donation = DonationUpdate(
-            donor_name=request.form["donor_name"].strip(),
-            blood_group=request.form.get("blood_group", "").strip(),
-            phone=request.form.get("phone", "").strip(),
-            location=request.form["location"].strip(),
-            donation_date=request.form["donation_date"],
-            photo=saved[0] if saved else None,
-            photos=",".join(saved) if saved else None,
-            description=request.form.get("description"),
-            video_url=request.form.get("video_url", "").strip() or None
-        )
-
-        db.session.add(donation)
-        db.session.commit()
-
-        return redirect(url_for("admin_dashboard"))
-
-    return render_template("add_donation.html")
 @app.route("/admin/logout")
 @login_required
 def admin_logout():
@@ -383,7 +347,7 @@ def admin_dashboard():
 @app.route("/admin/donors")
 @login_required
 def admin_donors():
-    donors = Donor.query.order_by(Donor.id.desc()).all()
+    donors = Donor.query.order_by(Donor.id.asc()).all()
     return render_template("admin_donors.html", donors=donors)
 
 @app.route("/admin/donors/edit/<int:id>", methods=["GET", "POST"])
@@ -437,16 +401,23 @@ def delete_donation(id):
 @app.route("/admin/gallery", methods=["GET", "POST"])
 @login_required
 def admin_gallery():
+    debug_msg = None
     if request.method == "POST":
-        saved = save_photos(request.files.getlist("photos"))
-        caption = request.form.get("caption", "").strip() or None
-        for name in saved:
-            db.session.add(Photo(filename=name, caption=caption))
-        db.session.commit()
-        return redirect(url_for("admin_gallery"))
+        files = request.files.getlist("photos")
+        debug_msg = f"Files received: {len(files)} | Names: {[f.filename for f in files]}"
+        try:
+            saved = save_photos(files)
+            debug_msg += f" | Saved URLs: {saved}"
+            caption = request.form.get("caption", "").strip() or None
+            for name in saved:
+                db.session.add(Photo(filename=name, caption=caption))
+            db.session.commit()
+            debug_msg += " | DB commit OK"
+        except Exception as e:
+            debug_msg += f" | ERROR: {str(e)}"
 
     photos = Photo.query.order_by(Photo.id.desc()).all()
-    return render_template("admin_gallery.html", photos=photos)
+    return render_template("admin_gallery.html", photos=photos, debug_msg=debug_msg)
 
 
 @app.route("/admin/gallery/edit/<int:id>", methods=["POST"])
@@ -472,6 +443,9 @@ def admin_delete_photo(id):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
+
 
 
 
